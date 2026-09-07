@@ -1,0 +1,167 @@
+{
+  "_comment": "Published version manifest for spz-update. Generated from each resource's fxmanifest.lua - the 'version' field here MUST match the one in the resource, because that is the value spz-update compares against.",
+  "channels": {
+    "stable": {
+      "spz-appearance": {
+        "version": "1.0.0",
+        "url": "https://github.com/SPiceZ21/spz-appearance",
+        "notes": "MP Freemode ped, outfits, crew outfits"
+      },
+      "spz-carfx": {
+        "version": "1.0.0",
+        "url": "https://github.com/SPiceZ21/spz-carfx",
+        "notes": "Custom vehicle particle effects"
+      },
+      "spz-carspawner": {
+        "version": "1.1.0",
+        "url": "https://github.com/SPiceZ21/spz-carspawner",
+        "notes": "Standalone Car Spawner (ox_lib menu)"
+      },
+      "spz-chat": {
+        "version": "1.0.0",
+        "url": "https://github.com/SPiceZ21/spz-chat",
+        "notes": "command autocomplete"
+      },
+      "spz-core": {
+        "version": "1.0.0",
+        "url": "https://github.com/SPiceZ21/spz-core",
+        "notes": "Framework bootstrap, sessions, state machine, routing buckets"
+      },
+      "spz-crew": {
+        "version": "1.0.0",
+        "url": "https://github.com/SPiceZ21/spz-crew",
+        "notes": "identity crew backend."
+      },
+      "spz-discord": {
+        "version": "1.0.0",
+        "url": "https://github.com/SPiceZ21/spz-discord",
+        "notes": "Discord embeds: live races, results/history, leaderboard"
+      },
+      "spz-fpscap": {
+        "version": "1.0.0",
+        "url": "https://github.com/SPiceZ21/spz-fpscap",
+        "notes": "60 FPS fairness cap (detect + block until the player limits their FPS)"
+      },
+      "spz-hideseek": {
+        "version": "1.1.0",
+        "url": "https://github.com/SPiceZ21/spz-hideseek",
+        "notes": "RC Hide & Seek. Everyone spawns as a tiny RC car in one contained zone; seekers find hiders by proximity. Free to play."
+      },
+      "spz-identity": {
+        "version": "1.5.0",
+        "url": "https://github.com/SPiceZ21/spz-identity",
+        "notes": "Player profiles, licenses, crews"
+      },
+      "spz-leaderboard": {
+        "version": "1.1.0",
+        "url": "https://github.com/SPiceZ21/spz-leaderboard",
+        "notes": "Leaderboard tablet UI (race results and archive, standings, classes, records, activity)"
+      },
+      "spz-loading": {
+        "version": "1.2.1",
+        "url": "https://github.com/SPiceZ21/spz-loading",
+        "notes": "Minimal Loading Screen"
+      },
+      "spz-log": {
+        "version": "1.0.1",
+        "url": "https://github.com/SPiceZ21/spz-log",
+        "notes": "SPiceZ Advanced Logging System"
+      },
+      "spz-nametag": {
+        "version": "1.1.6",
+        "url": "https://github.com/SPiceZ21/spz-nametag",
+        "notes": "SPiceZ-Core \u00e2\u20ac\u201d Dynamic Racing Nametags"
+      },
+      "spz-physics": {
+        "version": "1.4.0",
+        "url": "https://github.com/SPiceZ21/spz-physics",
+        "notes": "style powertrain simulation (torque curves, gears, clutch, rev limiter, engine braking)"
+      },
+      "spz-poll": {
+        "version": "1.1.2",
+        "url": "https://github.com/SPiceZ21/spz-poll",
+        "notes": "SPiceZ Poll Module"
+      },
+      "spz-progression": {
+        "version": "1.1.0",
+        "url": "https://github.com/SPiceZ21/spz-progression",
+        "notes": "XP, SR, iRating, ranks, license promotion"
+      },
+      "spz-pursuit": {
+        "version": "1.0.0",
+        "url": "https://github.com/SPiceZ21/spz-pursuit",
+        "notes": "Hot Pursuit. 1 runner vs up to 6 chasers; proximity bust meter; survive to escape or get busted. Credit wager, pot to the winning side."
+      },
+      "spz-raceUI": {
+        "version": "1.0.0",
+        "url": "https://github.com/SPiceZ21/spz-raceUI",
+        "notes": "SPiceZ Race UI (Countdown & Overlay)"
+      },
+      "spz-raceline": {
+        "version": "1.4.0",
+        "url": "https://github.com/SPiceZ21/spz-raceline",
+        "notes": "lap line per track, and paints it on the road (green = throttle, red = brake)"
+      },
+      "spz-races": {
+        "version": "1.9.0",
+        "url": "https://github.com/SPiceZ21/spz-races",
+        "notes": "Race engine, poll, timing, checkpoints"
+      },
+      "spz-rpc": {
+        "version": "1.0.1",
+        "url": "https://github.com/SPiceZ21/spz-rpc",
+        "notes": "live race status, position, class, and track in Discord"
+      },
+      "spz-spawn": {
+        "version": "1.1.0",
+        "url": "https://github.com/SPiceZ21/spz-spawn",
+        "notes": "SPiceZ-Core \u00e2\u20ac\u201d Standalone Spawning Manager"
+      },
+      "spz-spectate": {
+        "version": "1.0.0",
+        "url": "https://github.com/SPiceZ21/spz-spectate",
+        "notes": "clean spectator overlay usable by all players. Cycle any online player, view their live data (identity, rank, crown, race position/lap, speed, vehicle). Moves the viewer into the target routing bucket so racers in isolated buckets are visible."
+      },
+      "spz-speedcam": {
+        "version": "1.0.0",
+        "url": "https://github.com/SPiceZ21/spz-speedcam",
+        "notes": "Speed camera network with records"
+      },
+      "spz-speedometer": {
+        "version": "1.1.2",
+        "url": "https://github.com/SPiceZ21/spz-speedometer",
+        "notes": "Premium Racing Speedometer with spz-physics integration"
+      },
+      "spz-tunners": {
+        "version": "1.0.0",
+        "url": "https://github.com/SPiceZ21/spz-tunners",
+        "notes": "Driven Vehicle Tuning & Customization Resource built with ox_lib"
+      },
+      "spz-ui": {
+        "version": "1.0.0",
+        "url": "https://github.com/SPiceZ21/spz-ui",
+        "notes": "Reactive UI State Listeners"
+      },
+      "spz-update": {
+        "version": "1.0.0",
+        "url": "https://github.com/SPiceZ21/spz-update",
+        "notes": "Version report and update checker"
+      },
+      "spz-vegetation": {
+        "version": "1.0.0",
+        "url": "https://github.com/SPiceZ21/spz-vegetation",
+        "notes": "side by distance instead of binary streaming."
+      },
+      "spz-vehfunc": {
+        "version": "1.0.1",
+        "url": "https://github.com/SPiceZ21/spz-vehfunc",
+        "notes": "SPiceZ Vehicle Functions - Indicators, Hazards, Flash Headlights"
+      },
+      "spz-vehicles": {
+        "version": "1.0.0",
+        "url": "https://github.com/SPiceZ21/spz-vehicles",
+        "notes": "Vehicle registry, spawn, upgrades, customization"
+      }
+    }
+  }
+}

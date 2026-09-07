@@ -1,0 +1,31 @@
+{
+  "_comment": "Publish this file somewhere raw and point Config.ManifestUrl at it. Versions here must match the 'version' field in each resource's fxmanifest.lua, since that is what spz-update compares against.",
+  "channels": {
+    "stable": {
+      "spz-core": {
+        "version": "1.0.0",
+        "url": "https://example.com/spz-core/releases",
+        "notes": "sessions, buckets, migrations"
+      },
+      "spz-identity": { "version": "1.5.0" },
+      "spz-vehicles": { "version": "1.0.0" },
+      "spz-races": {
+        "version": "1.9.0",
+        "notes": "race engine"
+      },
+      "spz-progression": { "version": "1.1.0" },
+      "spz-spawn": { "version": "1.1.0" },
+      "spz-appearance": { "version": "1.0.0" },
+      "spz-leaderboard": { "version": "1.1.0" },
+      "spz-poll": { "version": "1.1.2" },
+      "spz-raceUI": { "version": "1.0.0" },
+      "spz-raceline": { "version": "1.4.0" },
+      "spz-physics": { "version": "1.4.0" },
+      "spz-ui": { "version": "1.0.0" },
+      "spz-update": { "version": "1.0.0" }
+    },
+    "beta": {
+      "spz-races": { "version": "1.10.0-rc1", "notes": "new sector timing" }
+    }
+  }
+}
