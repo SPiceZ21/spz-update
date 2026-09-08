@@ -172,9 +172,72 @@ function SPZUpdate.PrintRemoteReport(printer)
     end
 end
 
+-- Source: github ------------------------------------------------------------
+--
+-- Asks each module's own repository what it publishes, so there is no manifest
+-- file to keep in step with the resources it describes.
+local function checkViaGitHub(finish)
+    local names = {}
+    for _, e in ipairs(SPZUpdate.ScanLocal()) do
+        if not (Config.SkipRepos or {})[e.name] then
+            names[#names + 1] = e.name
+        end
+    end
+
+    SPZUpdate.FetchGitHub(names, function(published, stats)
+        -- A run where NOTHING resolved is a failure, not "up to date". The two
+        -- look identical in the report and only one of them is safe to believe:
+        -- DNS down, no outbound HTTP, a wrong owner name in config all produce
+        -- an empty result set, and reporting that as green is the worst thing
+        -- this resource could do.
+        if stats.ok == 0 and #names > 0 then
+            return finish(false, ("could not read any repository (%s)")
+                :format(stats.errors[1] or "no responses"))
+        end
+
+        if stats.failed > 0 then
+            warn("%d of %d lookups failed; those modules are reported as unchecked.",
+                stats.failed, #names)
+            for _, e in ipairs(stats.errors) do warn("  %s", e) end
+        end
+
+        compare(published, ("github:%s/%s"):format(
+            Config.GitHubOwner or "SPiceZ21", Config.GitHubBranch or "main"))
+        finish(true)
+        SPZUpdate.PrintRemoteReport()
+    end)
+end
+
 --- Run a check.
 --- @param onDone function|nil called with (ok, report) when it finishes
 function SPZUpdate.Check(onDone)
+    local source = Config.Source or "github"
+
+    if source == "github" then
+        if inFlight then
+            warn("a check is already running.")
+            if onDone then onDone(false, Report) end
+            return
+        end
+
+        inFlight = true
+        local settled = false
+
+        local function finish(ok, err)
+            if settled then return end
+            settled  = true
+            inFlight = false
+            if not ok then
+                Report.ok    = false
+                Report.error = err
+                warn("check failed: %s", err)
+            end
+            if onDone then onDone(ok, Report) end
+        end
+
+        return checkViaGitHub(finish)
+    end
+
     local url = Config.ManifestUrl
 
     if not url or url == "" then
