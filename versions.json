@@ -23,7 +23,7 @@
         "notes": "command autocomplete"
       },
       "spz-core": {
-        "version": "1.1.2",
+        "version": "1.1.3",
         "url": "https://github.com/SPiceZ21/spz-core",
         "notes": "Framework bootstrap, sessions, state machine, routing buckets"
       },
@@ -103,7 +103,7 @@
         "notes": "lap line per track, and paints it on the road (green = throttle, red = brake)"
       },
       "spz-races": {
-        "version": "1.11.0",
+        "version": "1.13.0",
         "url": "https://github.com/SPiceZ21/spz-races",
         "notes": "Race engine, poll, timing, checkpoints"
       },
