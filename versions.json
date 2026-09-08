@@ -23,7 +23,7 @@
         "notes": "command autocomplete"
       },
       "spz-core": {
-        "version": "1.0.2",
+        "version": "1.1.2",
         "url": "https://github.com/SPiceZ21/spz-core",
         "notes": "Framework bootstrap, sessions, state machine, routing buckets"
       },
@@ -93,7 +93,7 @@
         "notes": "Hot Pursuit. 1 runner vs up to 6 chasers; proximity bust meter; survive to escape or get busted. Credit wager, pot to the winning side."
       },
       "spz-raceUI": {
-        "version": "1.4.1",
+        "version": "1.4.2",
         "url": "https://github.com/SPiceZ21/spz-raceUI",
         "notes": "SPiceZ Race UI (Countdown & Overlay)"
       },
