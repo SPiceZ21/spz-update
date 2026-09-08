@@ -93,7 +93,7 @@
         "notes": "Hot Pursuit. 1 runner vs up to 6 chasers; proximity bust meter; survive to escape or get busted. Credit wager, pot to the winning side."
       },
       "spz-raceUI": {
-        "version": "1.0.0",
+        "version": "1.1.0",
         "url": "https://github.com/SPiceZ21/spz-raceUI",
         "notes": "SPiceZ Race UI (Countdown & Overlay)"
       },
@@ -128,7 +128,7 @@
         "notes": "Speed camera network with records"
       },
       "spz-speedometer": {
-        "version": "1.1.2",
+        "version": "1.2.0",
         "url": "https://github.com/SPiceZ21/spz-speedometer",
         "notes": "Premium Racing Speedometer with spz-physics integration"
       },
@@ -143,7 +143,7 @@
         "notes": "Reactive UI State Listeners"
       },
       "spz-update": {
-        "version": "1.0.0",
+        "version": "1.0.1",
         "url": "https://github.com/SPiceZ21/spz-update",
         "notes": "Version report and update checker"
       },

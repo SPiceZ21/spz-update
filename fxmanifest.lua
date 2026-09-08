@@ -3,7 +3,7 @@ game 'gta5'
 
 name 'spz-update'
 description 'SPiceZ-Core — Version report and update checker'
-version '1.0.0'
+version '1.0.1'
 author 'SPiceZ-Core'
 lua54 'on'
 
@@ -15,6 +15,7 @@ shared_scripts {
 
 server_scripts {
   'server/versions.lua',   -- local scan first: the checker compares against it
+  'server/github.lua',     -- defines FetchGitHub, which checker.lua calls
   'server/checker.lua',
   'server/commands.lua',
 }
