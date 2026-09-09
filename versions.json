@@ -103,7 +103,7 @@
         "notes": "lap line per track, and paints it on the road (green = throttle, red = brake)"
       },
       "spz-races": {
-        "version": "1.13.0",
+        "version": "1.14.1",
         "url": "https://github.com/SPiceZ21/spz-races",
         "notes": "Race engine, poll, timing, checkpoints"
       },
@@ -113,7 +113,7 @@
         "notes": "live race status, position, class, and track in Discord"
       },
       "spz-spawn": {
-        "version": "1.1.0",
+        "version": "1.2.1",
         "url": "https://github.com/SPiceZ21/spz-spawn",
         "notes": "SPiceZ-Core \u00e2\u20ac\u201d Standalone Spawning Manager"
       },
@@ -158,7 +158,7 @@
         "notes": "SPiceZ Vehicle Functions - Indicators, Hazards, Flash Headlights"
       },
       "spz-vehicles": {
-        "version": "1.0.0",
+        "version": "1.0.1",
         "url": "https://github.com/SPiceZ21/spz-vehicles",
         "notes": "Vehicle registry, spawn, upgrades, customization"
       }
