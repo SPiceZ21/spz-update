@@ -93,7 +93,7 @@
         "notes": "Hot Pursuit. 1 runner vs up to 6 chasers; proximity bust meter; survive to escape or get busted. Credit wager, pot to the winning side."
       },
       "spz-raceUI": {
-        "version": "1.5.2",
+        "version": "1.6.1",
         "url": "https://github.com/SPiceZ21/spz-raceUI",
         "notes": "SPiceZ Race UI (Countdown & Overlay)"
       },
@@ -103,7 +103,7 @@
         "notes": "lap line per track, and paints it on the road (green = throttle, red = brake)"
       },
       "spz-races": {
-        "version": "1.16.0",
+        "version": "1.16.2",
         "url": "https://github.com/SPiceZ21/spz-races",
         "notes": "Race engine, poll, timing, checkpoints"
       },
