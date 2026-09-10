@@ -3,7 +3,7 @@ game 'gta5'
 
 name 'spz-update'
 description 'SPiceZ-Core — Version report and update checker'
-version '1.0.1'
+version '1.0.2'
 author 'SPiceZ-Core'
 lua54 'on'
 
