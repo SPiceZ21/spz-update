@@ -6,8 +6,8 @@ Two halves, and the first one works with no network and no configuration:
 
 - **Version checker** — what this server is running right now, read straight from each
   resource's `fxmanifest.lua`. `/spzversion`.
-- **Update checker** — compares that against a published JSON manifest and reports what is
-  behind. `/spzupdate`.
+- **Update checker** — compares that against what each module's GitHub repository has
+  published, and reports what is behind. `/spzupdate`.
 
 ## It checks, it does not install
 
@@ -20,13 +20,28 @@ restart window. Telling that human there is one is what this does.
 
 ## Setup
 
-1. Add `ensure spz-update` to `server.cfg`, after `spz-core`.
-2. To enable the remote half, publish a manifest and set `Config.ManifestUrl` to its **raw**
-   URL. A rendered page returns HTML and is rejected as malformed.
+Add `ensure spz-update` to `server.cfg`, after `spz-core`. That is all — the default source
+needs no configuration.
 
-Left empty, the remote half stays off and says so once on boot. The local report still works.
+## Where "latest" comes from
 
-## The manifest
+**`Config.Source = "github"` (default).** Each module's own repository is asked for the
+`version` line in its `fxmanifest.lua` on the default branch. Every spz repo's release
+workflow bumps that line automatically from its commit messages on push, so publishing a
+module *is* the update notice. There is no second file to keep in step with the modules.
+
+It reads `raw.githubusercontent.com`, which is a CDN rather than the API, so a check across
+the whole set does not spend the 60-requests-per-hour unauthenticated API budget.
+
+Together with spz-deploy this is the whole loop: **`/spzupdate` tells you an update is
+published, `spzdeploy apply` takes it live.** spz-update still never installs anything itself.
+
+## The manifest source (optional)
+
+**`Config.Source = "manifest"`** reads one hand-maintained JSON file at `Config.ManifestUrl`
+instead — only worth it for a server that wants to pin its own channel. Nothing in this repo
+maintains one any more: the `versions.json` that used to live here was synced by hand, went
+stale the first time anyone forgot, and was never read by the default source anyway.
 
 See `versions.example.json`. Either shape is accepted:
 

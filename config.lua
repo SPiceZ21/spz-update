@@ -1,15 +1,24 @@
 Config = Config or {}
 
--- ── Where the latest versions are published ──────────────────────────────────
+-- ── Where "latest" comes from ────────────────────────────────────────────────
 --
--- A URL returning the JSON manifest documented in README.md. Empty means the
--- remote half is OFF: the local version report still works in full, and the
--- checker says once, on boot, that it has nowhere to check against rather than
--- failing quietly every hour.
+--   "github"   (default) Each resource's OWN repository is asked: the version
+--              line in fxmanifest.lua on its default branch. Every spz repo's
+--              release workflow bumps that line automatically on push, so
+--              publishing a module IS the update notice — there is no second
+--              file to keep in step, and nothing to forget.
 --
--- Point this at a RAW file, not a rendered page — a GitHub blob URL returns
--- HTML and will be rejected as malformed.
-Config.ManifestUrl = "https://raw.githubusercontent.com/SPiceZ21/spz-update/main/versions.json"
+--   "manifest" A single hand-maintained JSON file at Config.ManifestUrl, listing
+--              every module's version. Only for servers that pin their own
+--              channel. Nothing in this repo maintains one any more: the
+--              versions.json that used to live here was synced by hand, went
+--              stale the first time anyone forgot, and was never read by the
+--              default mode anyway.
+Config.Source = "github"
+
+-- Only used when Source is "manifest". A RAW file, not a rendered page — a
+-- GitHub blob URL returns HTML and will be rejected as malformed.
+Config.ManifestUrl = ""
 
 -- Release channel to read out of the manifest. A manifest may publish several;
 -- a channel that is absent falls back to "stable" and says so.
