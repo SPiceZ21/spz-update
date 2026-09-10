@@ -86,7 +86,7 @@ function SPZUpdate.FetchGitHub(resources, onDone)
     local timeout   = cfg("RequestTimeoutMs", 20000)
 
     local published = {}
-    local stats     = { ok = 0, missing = 0, failed = 0, errors = {} }
+    local stats     = { ok = 0, missing = 0, failed = 0, errors = {}, failedNames = {} }
 
     local queue, active, finished, settled = {}, 0, 0, false
     for _, name in ipairs(resources) do queue[#queue + 1] = name end
@@ -127,6 +127,7 @@ function SPZUpdate.FetchGitHub(resources, onDone)
             stats.missing = stats.missing + 1
         else
             stats.failed = stats.failed + 1
+            stats.failedNames[name] = true
             if #stats.errors < 5 then
                 stats.errors[#stats.errors + 1] = ("%s: %s"):format(name, tostring(err))
             end
@@ -138,8 +139,19 @@ function SPZUpdate.FetchGitHub(resources, onDone)
     end
 
     -- Read fxmanifest.lua from the default branch.
-    local function fetchManifest(name)
+    -- Status 0 is not an answer from GitHub: the connection never completed
+    -- (TLS handshake dropped, socket reset). It is transient by nature, and it
+    -- arrives in bursts, so one retry after a pause turns almost all of them
+    -- into a real result. A 404 or any other genuine status is never retried.
+    local RETRY_AFTER_MS = 900
+
+    local function fetchManifest(name, attempt)
+        attempt = attempt or 1
         PerformHttpRequest(rawManifestUrl(name), function(status, body)
+            if (not status or status <= 0) and attempt < 2 then
+                SetTimeout(RETRY_AFTER_MS, function() fetchManifest(name, attempt + 1) end)
+                return
+            end
             if status == 404 then return done(name, nil, "missing") end
             if status ~= 200 then return done(name, nil, ("HTTP %s"):format(tostring(status))) end
 
@@ -171,12 +183,21 @@ function SPZUpdate.FetchGitHub(resources, onDone)
 
     local fetch = (mode == "release") and fetchRelease or fetchManifest
 
+    -- The concurrency window used to be filled in ONE tick: six TLS handshakes
+    -- to the same host opened in the same instant. The ones at the back of that
+    -- burst were the ones that failed — spz-core and spz-crew one run, spz-chat
+    -- and spz-crew the next, always from positions 3-6 of the alphabetical
+    -- list, while their URLs answered 200 on their own. Spacing the dispatches
+    -- keeps the parallelism and loses the burst.
+    local dispatchGap = cfg("DispatchGapMs", 120)
+
     CreateThread(function()
         while #queue > 0 do
             if active < maxActive then
                 local name = table.remove(queue, 1)
                 active = active + 1
                 fetch(name)
+                Wait(dispatchGap)
             else
                 Wait(25)
             end

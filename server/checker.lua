@@ -42,6 +42,7 @@ function SPZUpdate.GetReport()
         channel   = Report.channel,
         updates   = Report.updates,
         unknown   = Report.unknown,
+        failed    = Report.failed,
         ahead     = Report.ahead,
     }
 end
@@ -90,14 +91,24 @@ local function entryVersion(v)
     return nil, nil, nil
 end
 
-local function compare(published, channelName)
+--- @param failed table|nil  set of names whose lookup FAILED this run.
+---
+--- A failed lookup and an absent entry both leave `published[name]` nil, and
+--- the report used to print them identically: "not in the manifest, so not
+--- checked". That is false for a failure — the module IS published, the request
+--- just did not complete — and it sends you looking for a missing repo that
+--- exists. They are separate lists now.
+local function compare(published, channelName, failed)
     local locals  = SPZUpdate.LocalMap()
-    local updates, unknown, ahead = {}, {}, {}
+    local updates, unknown, ahead, failedList = {}, {}, {}, {}
+    failed = failed or {}
 
     for name, entry in pairs(locals) do
         local pubRaw = published[name]
 
-        if pubRaw == nil then
+        if pubRaw == nil and failed[name] then
+            failedList[#failedList + 1] = name
+        elseif pubRaw == nil then
             unknown[#unknown + 1] = name
         elseif entry.version then
             local latest, url, notes = entryVersion(pubRaw)
@@ -133,6 +144,8 @@ local function compare(published, channelName)
     Report.channel   = channelName
     Report.updates   = updates
     Report.unknown   = unknown
+    table.sort(failedList)
+    Report.failed    = failedList
     Report.ahead     = ahead
 
     return Report
@@ -165,6 +178,10 @@ function SPZUpdate.PrintRemoteReport(printer)
             names[#names + 1] = ("%s (v%s > published v%s)"):format(a.name, a.current, a.latest)
         end
         out(("^5  ahead of channel:^7 %s"):format(table.concat(names, ", ")))
+    end
+
+    if Report.failed and #Report.failed > 0 then
+        out(("^3  lookup failed, not checked this run:^7 %s"):format(table.concat(Report.failed, ", ")))
     end
 
     if #Report.unknown > 0 then
@@ -202,7 +219,8 @@ local function checkViaGitHub(finish)
         end
 
         compare(published, ("github:%s/%s"):format(
-            Config.GitHubOwner or "SPiceZ21", Config.GitHubBranch or "main"))
+            Config.GitHubOwner or "SPiceZ21", Config.GitHubBranch or "main"),
+            stats.failedNames)
         finish(true)
         SPZUpdate.PrintRemoteReport()
     end)
